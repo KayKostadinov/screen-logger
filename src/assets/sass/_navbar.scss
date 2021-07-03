@@ -1,0 +1,86 @@
+
+.nav-container {
+    position: relative;
+    background-color: $site-bg;
+    box-shadow: 0 5px 3px rgba(black, .1);
+    z-index: 1000;
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem 0;
+    
+        &__logo {
+            display: flex;
+    
+            .fa-film {
+                font-size: 2rem;
+                color: #008f8a;
+                transition: all 0.2s ease-in-out;
+              
+                &:hover,
+                &:active {
+                  transform: rotate(360deg) scale(1.5);
+                  color: $primary-light;
+                }
+              }
+        }
+    
+        &__search {
+            width: 40vw;
+    
+            .form-group {
+                position: relative;
+                display: flex;
+                flex-direction: row;
+    
+                .form-item {
+                    display: block;
+                    width: 100%;
+                    max-width: unset;
+                }
+            }
+    
+            .btn {
+                position: absolute;
+                right: 0;
+                margin: 0 .5rem;
+                padding: .5rem .6rem;
+                border-radius: 50%;
+                background-color: transparent;
+                color: $primary-color;
+                transition: all .2s ease-in-out;
+
+                &:hover, &:active {
+                    transform: scale(1.3);
+                    filter: drop-shadow(0 0 2px $primary-color);
+                    color: white;
+                }
+
+                i {
+                    color: inherit;
+                }
+            }
+        }
+    
+        &__user {
+            display: flex;
+    
+        }
+    
+        &__auth {
+            display: flex;
+            align-items: center;
+        }
+
+        a {
+            margin: 0 .5rem;
+        }
+
+
+        h3 {
+            margin: 0;
+        }
+    }
+}

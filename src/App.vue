@@ -1,30 +1,31 @@
+
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <Navbar @searchTerm="searchMovies" />
+  <div class="main">
+    <div class="main__overlay">
+      <SearchRes :movieres="movies" />
+      <router-view />
+    </div>
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Navbar from "./components/Navbar.vue";
+import getMovies from "./composables/getSearchResult";
+import SearchRes from "./views/lists/SearchRes.vue";
+import { defineComponent, ref } from "vue";
 
-#nav {
-  padding: 30px;
+export default defineComponent({
+  components: { Navbar, SearchRes },
+  setup() {
+    const movies = ref(null);
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    const searchMovies = async (e) => {
+      movies.value = await getMovies(e);
+      // console.log(movies.value)
+    };
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+    return { movies, searchMovies };
+  },
+});
+</script>

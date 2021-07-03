@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SearchRes></SearchRes>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import SearchRes from "c:/Users/Kay/code/where-was-i/src/views/lists/SearchRes.vue";
+
+import { ref } from "@vue/reactivity";
+// import SearchRes from "./lists/SearchRes.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    SearchRes,
+  },
+  setup() {
+    const movies = ref(null);
+
+    return { movies };
+  },
+};
 </script>
