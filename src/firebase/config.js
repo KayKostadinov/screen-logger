@@ -3,12 +3,12 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBNg6zC22X6A-9_ikj-yZoy6UukMb9K5tQ",
-    authDomain: "where-was-i-26251.firebaseapp.com",
-    projectId: "where-was-i-26251",
-    storageBucket: "where-was-i-26251.appspot.com",
-    messagingSenderId: "710671963920",
-    appId: "1:710671963920:web:cf447632f2e4382961b795"
+    apiKey: "AIzaSyA8y_3LnbOoq4BybEwFT2huM97k69ShUAw",
+    authDomain: "screen-logger.firebaseapp.com",
+    projectId: "screen-logger",
+    storageBucket: "screen-logger.appspot.com",
+    messagingSenderId: "777053202328",
+    appId: "1:777053202328:web:e94926198e4d16a84deded"
 };
 
 firebase.initializeApp(firebaseConfig)
@@ -19,4 +19,4 @@ const projectAuth = firebase.auth()
 const timestamp = firebase.firestore.FieldValue.serverTimestamp
 
 
-export {projectFirestore, projectAuth, timestamp}
+export { projectFirestore, projectAuth, timestamp }
