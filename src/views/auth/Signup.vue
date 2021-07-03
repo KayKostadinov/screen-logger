@@ -44,6 +44,7 @@
 
 <script>
 import { ref } from "vue";
+// @ts-ignore
 import useSignup from "@/composables/useSignup";
 
 export default {

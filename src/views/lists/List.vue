@@ -1,4 +1,4 @@
-<template>howdy</template>
+<template>single list</template>
 
 <script>
 export default {};

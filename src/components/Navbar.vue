@@ -7,13 +7,9 @@
             ><i class="fas fa-film"></i
           ></router-link>
         </div>
-        <div class="nav__search">
-          <form class="form" @submit.prevent="handleSearch">
-            <div class="form-group">
-              <input type="text" class="form-item" v-model="searchTerm" />
-              <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-            </div>
-          </form>
+        <div class="nav__nav">
+          <router-link :to="{ name: 'Lists' }">My Movies</router-link>
+          <router-link :to="{ name: 'Search' }">Search</router-link>
         </div>
         <div class="nav__user"></div>
         <div style="display: flex">
@@ -41,15 +37,15 @@
 import useLogout from "@/composables/useLogout";
 import getUser from "@/composables/getUser";
 import { useRouter } from "vue-router";
-import { ref } from '@vue/reactivity';
+import { ref } from "@vue/reactivity";
 
 export default {
-  emits: ['searchTerm', ],
+  emits: ["searchTerm"],
   setup(props, context) {
     const { logout, error } = useLogout();
     const { user } = getUser();
     const router = useRouter();
-    const searchTerm = ref('');
+    const searchTerm = ref("");
 
     const handleLogout = async () => {
       await logout();
@@ -60,7 +56,7 @@ export default {
     };
 
     const handleSearch = () => {
-      context.emit('searchTerm', searchTerm.value);
+      context.emit("searchTerm", searchTerm.value);
     };
 
     return { handleSearch, error, handleLogout, user, searchTerm };

@@ -1,9 +1,8 @@
 
 <template>
-  <Navbar @searchTerm="searchMovies" />
+  <Navbar />
   <div class="main">
     <div class="main__overlay">
-      <SearchRes :movieres="movies" />
       <router-view />
     </div>
   </div>
@@ -11,21 +10,12 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import getMovies from "./composables/getSearchResult";
-import SearchRes from "./views/lists/SearchRes.vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: { Navbar, SearchRes },
+  components: { Navbar },
   setup() {
-    const movies = ref(null);
-
-    const searchMovies = async (e) => {
-      movies.value = await getMovies(e);
-      // console.log(movies.value)
-    };
-
-    return { movies, searchMovies };
+    return {};
   },
 });
 </script>

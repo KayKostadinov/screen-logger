@@ -28,7 +28,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
 import Home from '../views/Home.vue'
-import CreateList from '../views/lists/CreateList.vue'
+import Search from '../views/Search.vue'
+import Lists from '../views/lists/Lists.vue'
+import List from '../views/lists/List.vue'
 
 // TODO
 const requireAuth = () => {
@@ -59,11 +61,23 @@ const routes = [
     beforeEnter: noAuth
   },
   {
-    path: '/movielists/create',
-    name: 'CreateList',
-    component: CreateList,
-    beforeEnter: requireAuth
-  }
+    path: '/search',
+    name: 'Search',
+    component: Search,
+    // beforeEnter: requireAuth
+  },
+  {
+    path: '/my-lists',
+    name: 'Lists',
+    component: Lists,
+    // beforeEnter: requireAuth
+  },
+  {
+    path: '/my-lists/list',
+    name: 'List',
+    component: List,
+    // beforeEnter: requireAuth
+  },
 ]
 
 const router = createRouter({
