@@ -425,162 +425,11 @@ i:hover, i:active {
 }
 
 .search__box .form-group .btn:hover, .search__box .form-group .btn-secondary:hover, .search__box .form-group .btn-flat:hover, .search__box .form-group .btn-clear:hover, .search__box .form-group .btn:active, .search__box .form-group .btn-secondary:active, .search__box .form-group .btn-flat:active, .search__box .form-group .btn-clear:active {
-  transform: scale(1.3);
-  filter: drop-shadow(0 0 2px #008F8A);
-  color: white;
+  transform: scale(1.1);
 }
 
 .search__box .form-group .btn i, .search__box .form-group .btn-secondary i, .search__box .form-group .btn-flat i, .search__box .form-group .btn-clear i {
   color: inherit;
-}
-
-.search__res {
-  padding: 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 1rem;
-}
-
-.search__res .load-more {
-  grid-column: 1/ -1;
-  display: flex;
-  justify-content: center;
-}
-
-.search__res .load-more .btn-secondary, .search__res .load-more .btn-flat {
-  padding: 1rem 5rem;
-  font-weight: 600;
-}
-
-.search__res .movie {
-  position: relative;
-  transform: scale(1, 1);
-  transition: all .2s ease-out;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.search__res .movie:hover, .search__res .movie:active {
-  transform: scale(1.1, 1.1);
-  z-index: 5;
-}
-
-.search__res .movie:hover .title, .search__res .movie:active .title {
-  display: none;
-}
-
-.search__res .movie:hover .poster-container, .search__res .movie:active .poster-container {
-  max-height: unset !important;
-}
-
-.search__res .movie .poster-container {
-  overflow: hidden;
-  border-radius: 20px;
-  height: 80%;
-}
-
-@media (min-width: 576px) {
-  .search__res .movie .poster-container {
-    max-height: 350px;
-  }
-}
-
-@media (min-width: 768px) {
-  .search__res .movie .poster-container {
-    max-height: 500px;
-  }
-}
-
-@media (min-width: 992px) {
-  .search__res .movie .poster-container {
-    max-height: 400px;
-  }
-}
-
-.search__res .movie .poster-container img {
-  min-width: 100%;
-}
-
-.search__res .movie .poster-container .no-poster {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.search__res .movie .poster-container .no-poster i {
-  font-size: 15rem;
-}
-
-.search__res .movie .title {
-  text-align: center;
-  padding: 1rem;
-  margin: 0;
-  z-index: 2000;
-}
-
-.search__res .movie .title-again {
-  margin: 0;
-  margin-top: .5rem;
-  padding: 0 1rem;
-  text-align: center;
-}
-
-.search__res .movie .details-container {
-  position: absolute;
-  top: 0;
-  bottom: 20%;
-  left: 0;
-  right: 0;
-  height: 80%;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.search__res .movie .details-container .details {
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 0;
-  transform: translate(0, 110%);
-  transition: all .2s ease-out;
-  display: grid;
-  grid-template-rows: min-content min-content min-content auto min-content;
-  gap: .5rem;
-  border: 2px solid #e87800;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.search__res .movie .details-container .details p, .search__res .movie .details-container .details small {
-  pointer-events: none;
-}
-
-.search__res .movie .details-container .details small {
-  display: block;
-  font-size: 11px;
-  color: #e9e9e9;
-  padding: 0 1rem;
-}
-
-.search__res .movie .details-container .details p {
-  text-align: justify;
-  padding: 0 1rem;
-  overflow: hidden;
-  font-size: 12px;
-  height: 80%;
-}
-
-.search__res .movie .details-container .details .buttons {
-  align-self: flex-end;
-}
-
-.search__res .movie .details-container:hover .details, .search__res .movie .details-container:active .details {
-  opacity: 1;
-  transform: translate(0, 0%);
-  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .movie-options--overlay {
@@ -729,12 +578,11 @@ i:hover, i:active {
   font-weight: 600;
 }
 
-.movie-options__card .content p span {
+.movie-options__card .content .more-details .runtime span, .movie-options__card .content .more-details .rating span {
   margin: .25rem;
   padding: .25rem .5rem;
   font-size: 14px;
   font-weight: 600;
-  background-color: #008F8A;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -754,5 +602,112 @@ i:hover, i:active {
   background-color: #008F8A;
   border-radius: 20px;
   overflow: hidden;
+}
+
+.search__res {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.search__res .load-more {
+  grid-column: 1/ -1;
+  display: flex;
+  justify-content: center;
+}
+
+.search__res .load-more .btn-secondary, .search__res .load-more .btn-flat {
+  padding: 1rem 5rem;
+  font-weight: 600;
+}
+
+.search__res .movie {
+  position: relative;
+  transition: all .2s ease-out;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 80%;
+}
+
+.search__res .movie .poster-container {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.search__res .movie .poster-container img {
+  min-width: 100%;
+}
+
+.search__res .movie .poster-container .no-poster {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.search__res .movie .poster-container .no-poster i {
+  font-size: 15rem;
+}
+
+.search__res .movie .title {
+  margin: 0;
+  margin-top: .5rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.search__res .movie .details-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.search__res .movie .details-container .details {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: all .2s ease-out;
+  display: grid;
+  grid-template-rows: min-content min-content min-content auto min-content;
+  gap: .5rem;
+  border: 2px solid #e87800;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.search__res .movie .details-container .details p, .search__res .movie .details-container .details small {
+  pointer-events: none;
+}
+
+.search__res .movie .details-container .details small {
+  display: block;
+  font-size: 11px;
+  color: #e9e9e9;
+  padding: 0 1rem;
+}
+
+.search__res .movie .details-container .details p {
+  text-align: justify;
+  padding: 0 1rem;
+  overflow: hidden;
+  font-size: 12px;
+  height: 80%;
+}
+
+.search__res .movie .details-container .details .buttons {
+  align-self: flex-end;
+}
+
+.search__res .movie .details-container:hover .details, .search__res .movie .details-container:active .details {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 /*# sourceMappingURL=main.css.map */

@@ -8,7 +8,7 @@ const getTrailer = async (movieTitle) => {
 
     const sanitizeTitle = movieTitle.replace(/[^a-zA-Z ]/g, "");
     const fallbackSearch = sanitizeTitle.split(' ').join('+');
-    const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyA2eft58muNTxJTsdYU4S6nodGTdfZ5l_o&q=${sanitizeTitle}trailer&type=video&videoDuration=short&part=snippet`
+    const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyA2eft58muNTxJTsdYU4S6nodGTdfZ5l_o&q=${sanitizeTitle} trailer&type=video&videoDuration=short&part=snippet`
     const ytUrl = `https://www.youtube.com/watch?v=`;
     const fallback = `https://www.youtube.com/results?search_query=${fallbackSearch}+trailer`;
 

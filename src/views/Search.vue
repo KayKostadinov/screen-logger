@@ -16,22 +16,21 @@
         </div>
       </form>
     </div>
-    <div v-if="searchRes">
+    <div v-if="movies">
       <SearchResults
         :movies="movies"
         @load-more-results="loadMore"
+        @open-options="onOpenOptions"
       ></SearchResults>
     </div>
   </section>
-  <seaction v-if="showOptions">
+  <section v-if="showOptions">
     <MovieOptions
       @close-popup="hideOptions"
-      @open-options="openOptionsWindow($event)"
       :movieTitle="openOptions.movieTitle"
       :movieId="openOptions.movieId"
-      :showLoadMore="showLoadMore"
     ></MovieOptions>
-  </seaction>
+  </section>
 </template>
 
 <script>
@@ -46,24 +45,28 @@ export default {
     SearchResults,
   },
   setup() {
+    // search bar
     const searchTerm = ref(null);
-    const searchRes = ref(null);
-    const showInfo = ref(false);
     const movies = ref(null);
+
+    // pages
     const currentPage = ref(1);
     const totalPages = ref(null);
-    const showLoadMore = ref(true);
+
+    // options window
     const openOptions = ref({
-      movieTitle: "Interstellar",
-      movieId: "157336",
+      movieTitle: "",
+      movieId: "",
     });
     const showOptions = ref(false);
 
     const handleSearch = async () => {
       if (searchTerm) {
-        searchRes.value = await getSearchResults(searchTerm.value);
-        movies.value = searchRes.value.results;
-        totalPages.value = searchRes.value.total_pages;
+        const { results, total_pages } = await getSearchResults(
+          searchTerm.value
+        );
+        movies.value = results;
+        totalPages.value = parseInt(total_pages);
       }
     };
 
@@ -71,38 +74,23 @@ export default {
       currentPage.value++;
 
       if (currentPage.value >= totalPages.value) {
-        showLoadMore.value = false;
         return;
       }
 
-      searchRes.value = await getSearchResults(
+      const searchRes = await getSearchResults(
         searchTerm.value,
         currentPage.value
       );
 
-      movies.value = [...movies.value, ...searchRes.value.results];
+      movies.value = [...movies.value, ...searchRes.results];
     };
 
-    // TODO: move to utils
-    const trimString = (str, wordCount) => {
-      if (!str) return;
-      const split = str.split(" ");
-
-      if (split.length > wordCount) {
-        return split.slice(0, wordCount).join(" ") + "...";
-      }
-
-      return str;
-    };
-
-    const openOptionsWindow = (event) => {
-      console.log(event);
-      //title, id
-      // openOptions.value = {
-      //   movieTitle: title,
-      //   movieId: id,
-      // };
-      // showOptions.value = true;
+    const onOpenOptions = ({ title, id }) => {
+      openOptions.value = {
+        movieTitle: title,
+        movieId: id,
+      };
+      showOptions.value = true;
     };
 
     const hideOptions = () => {
@@ -112,15 +100,11 @@ export default {
     return {
       handleSearch,
       searchTerm,
-      searchRes,
-      showInfo,
-      trimString,
       movies,
       loadMore,
-      showLoadMore,
       openOptions,
       showOptions,
-      openOptionsWindow,
+      onOpenOptions,
       hideOptions,
     };
   },

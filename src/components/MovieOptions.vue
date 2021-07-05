@@ -3,9 +3,13 @@
     <div class="movie-options--overlay" @click="$emit('closePopup')"></div>
     <div
       class="movie-options__card"
-      :style="{
-        backgroundImage: `url(https://image.tmdb.org/t/p/w500/${details?.poster_path})`,
-      }"
+      :style="
+        details && [
+          {
+            backgroundImage: `url(https://image.tmdb.org/t/p/w500/${details.poster_path})`,
+          },
+        ]
+      "
     >
       <i class="far fa-times-circle" @click.prevent="$emit('closePopup')"></i>
       <div class="content">
@@ -17,11 +21,14 @@
         </div>
         <div class="more-details">
           <p class="runtime">
-            Runtime <span>{{ details?.runtime }} minutes</span>
+            Runtime
+            <span :class="runtimeClassName"
+              >{{ details?.runtime }} minutes</span
+            >
           </p>
           <p class="rating">
             Average rating
-            <span :class="getRatingColor()">{{ details?.vote_average }}</span>
+            <span :class="ratingClassName">{{ details?.vote_average }}</span>
           </p>
         </div>
         <div class="overview">
@@ -45,7 +52,7 @@
 import getTrailer from "../composables/getYTtrailer";
 import getFullMovieDetails from "../composables/getFullMovieDetails";
 import Utils from "../Utils";
-import { ref, toRefs, watch, onMounted } from "vue";
+import { ref, toRefs, watch, onBeforeMount } from "vue";
 
 export default {
   props: {
@@ -59,28 +66,40 @@ export default {
     const details = ref(null);
     const zamundaLink = ref(null);
     const imdbLink = ref(null);
+    const ratingClassName = ref("bg-color--green");
+    const runtimeClassName = ref("bg-color--green");
 
     const getRatingColor = () => {
-      let className = "bg-color--green";
-
-      if (details.value) {
-        className =
-          details.value.vote_average < 8 ? "bg-color--mint" : "bg-color--green";
-        className =
-          details.value.vote_average < 5
-            ? "bg-color--orange"
-            : "bg-color--green";
-        className =
-          details.value.vote_average < 3 ? "bg-color--red" : "bg-color--green";
+      if (details.value.vote_average < 9) {
+        ratingClassName.value = "bg-color--mint";
       }
-      return className;
+      if (details.value.vote_average < 7) {
+        ratingClassName.value = "bg-color--orange";
+      }
+      if (details.value.vote_average <= 5) {
+        ratingClassName.value = "bg-color--red";
+      }
     };
 
-    onMounted(async () => {
+    const getRuntimeColor = () => {
+      if (details.value.runtime > 90) {
+        runtimeClassName.value = "bg-color--mint";
+      }
+      if (details.value.runtime > 120) {
+        runtimeClassName.value = "bg-color--orange";
+      }
+      if (details.value.runtime >= 180) {
+        runtimeClassName.value = "bg-color--red";
+      }
+    };
+
+    onBeforeMount(async () => {
       ytRes.value = await getTrailer(movieTitle.value);
       zamundaLink.value = Utils.zamundaMovie(movieTitle.value);
       details.value = await getFullMovieDetails(movieId.value);
       imdbLink.value = Utils.imdbLink(details.value?.imdb_id);
+      getRatingColor();
+      getRuntimeColor();
     });
 
     watch(movieTitle, async () => {
@@ -91,6 +110,8 @@ export default {
     watch(movieId, async () => {
       details.value = await getFullMovieDetails(movieId.value);
       imdbLink.value = Utils.imdbLink(details.value?.imdb_id);
+      getRuntimeColor();
+      getRatingColor();
     });
 
     return {
@@ -98,7 +119,8 @@ export default {
       details,
       ytRes,
       imdbLink,
-      getRatingColor,
+      ratingClassName,
+      runtimeClassName,
     };
   },
 };
