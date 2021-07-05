@@ -70,7 +70,7 @@ const routes = [
     path: '/my-lists',
     name: 'Lists',
     component: Lists,
-    // beforeEnter: requireAuth
+    beforeEnter: requireAuth
   },
   {
     path: '/my-lists/list',

@@ -1,6 +1,6 @@
 
-const getSearchResult = async query => {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${query}`;
+const getSearchResult = async (query, page = 1) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${query}&page=${page}`;
 
   try {
     const res = await fetch(url, {
@@ -12,7 +12,7 @@ const getSearchResult = async query => {
     });
 
     const movies = await res.json();
-    return movies.results;
+    return movies;
 
   } catch (err) {
     console.log(err.message);

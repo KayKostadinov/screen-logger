@@ -17,10 +17,10 @@
     h4,
     h5,
     h6 {
-        margin-bottom: 0;
+        margin: 0;
     }
 
-    &:hover, &:active, &:focus {
+    &:hover, &:active {
         background-color: $primary-light;
     }
 
@@ -29,7 +29,11 @@
         
         border-radius: 0;
         width: 50%;
-        padding: 1rem
+        padding: 1rem;
+
+        &:hover, &:active {
+            font-weight: 600;
+        }
     }
 }
 
@@ -37,7 +41,7 @@
     @extend .btn;
     background-color: $secondary-color;
 
-    &:hover, &:active, &:focus {
+    &:hover, &:active {
         background-color: $secondary-dark;
     }
 }
@@ -49,7 +53,7 @@
     color: $primary-light;
     border-color: $primary-light;
 
-    &:hover, &:active, &:focus {
+    &:hover, &:active {
         background-color: $primary-light;
         color: white;
     }
@@ -182,6 +186,19 @@
     max-width: 80%;
 }
 
+.fullscreen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;
@@ -190,5 +207,29 @@
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+.img-fluid {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.bg-color {
+    &--red {
+        background-color: $red;
+    }
+
+    &--orange {
+        background-color: $orange;
+    }
+
+    &--mint {
+        background-color: $mint;
+    }
+
+    &--green {
+        background-color: $green;
     }
 }
