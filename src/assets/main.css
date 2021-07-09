@@ -483,7 +483,7 @@ i:hover, i:active {
   height: 100%;
   overflow: hidden;
   display: grid;
-  grid-template-rows: repeat(3, min-content) auto min-content;
+  grid-template-rows: repeat(3, min-content) auto 170px;
 }
 
 .movie-options__card .content .links {
@@ -551,6 +551,14 @@ i:hover, i:active {
   border-top: 2px solid #E87800;
   border-bottom: 2px solid #E87800;
   background-color: rgba(0, 0, 0, 0.3);
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.movie-options__card .content .overview ::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -562,7 +570,6 @@ i:hover, i:active {
 .movie-options__card .content .overview p {
   font-size: 20px;
   font-weight: 500;
-  overflow: scroll;
 }
 
 .movie-options__card .content .more-details {
@@ -627,29 +634,25 @@ i:hover, i:active {
   transition: all .2s ease-out;
   border-radius: 20px;
   overflow: hidden;
-  height: 80%;
 }
 
 .search__res .movie .poster-container {
   overflow: hidden;
   border-radius: 20px;
-}
-
-.search__res .movie .poster-container img {
+  min-height: 110vw;
   min-width: 100%;
-}
-
-.search__res .movie .poster-container .no-poster {
-  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
-  align-items: center;
-  align-content: center;
   justify-content: center;
-  height: 100%;
+  align-items: center;
 }
 
-.search__res .movie .poster-container .no-poster i {
-  font-size: 15rem;
+@media (min-width: 556px) {
+  .search__res .movie .poster-container {
+    min-height: 400px;
+  }
 }
 
 .search__res .movie .title {
@@ -672,24 +675,25 @@ i:hover, i:active {
 
 .search__res .movie .details-container .details {
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 0;
-  transition: all .2s ease-out;
   display: grid;
   grid-template-rows: min-content min-content min-content auto min-content;
   gap: .5rem;
-  border: 2px solid #e87800;
+  border: 1px solid #e87800;
   border-radius: 20px;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: all .2s ease-out;
 }
 
-.search__res .movie .details-container .details p, .search__res .movie .details-container .details small {
-  pointer-events: none;
+.search__res .movie .details-container .details:hover, .search__res .movie .details-container .details:active {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .search__res .movie .details-container .details small {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   color: #e9e9e9;
   padding: 0 1rem;
 }
@@ -697,17 +701,23 @@ i:hover, i:active {
 .search__res .movie .details-container .details p {
   text-align: justify;
   padding: 0 1rem;
-  overflow: hidden;
-  font-size: 12px;
-  height: 80%;
+  overflow: scroll;
+  overflow-x: hidden;
+  font-size: 14px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.search__res .movie .details-container .details p ::-webkit-scrollbar {
+  display: none;
 }
 
 .search__res .movie .details-container .details .buttons {
   align-self: flex-end;
 }
 
-.search__res .movie .details-container:hover .details, .search__res .movie .details-container:active .details {
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.75);
+.search__res .movie .details-container .details .buttons .btn-flat {
+  padding: .5rem 1rem;
+  font-weight: 600;
 }
 /*# sourceMappingURL=main.css.map */

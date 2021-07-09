@@ -105,6 +105,7 @@ export default {
     watch(movieTitle, async () => {
       ytRes.value = await getTrailer(movieTitle.value);
       zamundaLink.value = Utils.zamundaMovie(movieTitle.value);
+      console.log(ytRes.value);
     });
 
     watch(movieId, async () => {

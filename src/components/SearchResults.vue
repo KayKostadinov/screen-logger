@@ -1,20 +1,23 @@
 <template>
   <div class="search__res">
     <div class="movie" v-for="movie in movies" :key="movie.id">
-      <div class="poster-container">
-        <div v-if="!movie.poster_path" class="no-poster">
-          <i class="fas fa-film"></i>
-        </div>
-        <img
-          v-else
-          :src="movie && imagePath + movie.poster_path"
-          alt="poster"
-          class="img-fluid poster"
-        />
+      <div
+        class="poster-container"
+        :style="
+          movie?.poster_path
+            ? [
+                {
+                  backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
+                },
+              ]
+            : [{ backgroundColor: 'rgba(255, 255, 255, 0.25)' }]
+        "
+      >
+        <h1 v-if="!movie?.poster_path">{{ movie.title }}</h1>
       </div>
       <div class="details-container">
         <div class="details">
-          <h3 class="title">{{ movie.title }}</h3>
+          <h2 class="title">{{ movie.title }}</h2>
           <small class="realease-date">
             Release: {{ movie.release_date }}
           </small>

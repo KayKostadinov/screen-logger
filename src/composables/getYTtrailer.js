@@ -23,13 +23,13 @@ const getTrailer = async (movieTitle) => {
 
         const parse = await res.json();
 
-        if (parse.error.code == 403) {
+        if (parse.error) {
             quotaReached = true;
             trailerLink.value = fallback;
             return trailerLink.value;
         }
 
-        const videoId = parse?.items[0]?.id.videoId
+        const videoId = parse.items[0].id.videoId;
         trailerLink.value = ytUrl + videoId;
 
         return trailerLink.value;
